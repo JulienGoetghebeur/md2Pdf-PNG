@@ -1,0 +1,6 @@
+#!/bin/bash
+#SAE103 BUT info 2022
+#GOETGHEBEUR Julien
+
+docker container cp config.md sae103-python:/data/md/
+docker container cp style.css sae103-python:/data/md/

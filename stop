@@ -1,0 +1,13 @@
+#!/bin/bash
+#SAE103 BUT info 2022
+#GOETGHEBEUR Julien
+
+docker container stop sae103-python
+docker container rm sae103-python
+docker container stop sae103-weasyprint
+docker container rm sae103-weasyprint
+docker container stop sae103-html2png
+docker container rm sae103-html2png
+docker container stop sae103-finish
+docker container rm sae103-finish
+docker volume rm sae103

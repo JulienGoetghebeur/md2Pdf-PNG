@@ -1,0 +1,33 @@
+#!/bin/bash
+#SAE103 BUT info 2022
+#GOETGHEBEUR Julien
+
+num=0;
+dir_in='html';
+dir_out='pdf';
+fic_start='style.css';
+
+echo "Création des dossiers $dir_in et $dir_out";
+if [[ ! -d $dir_in ]]; then
+	mkdir $dir_in;
+	echo "$dir_in créé"
+fi
+if [[ ! -d $dir_out ]]; then
+	mkdir $dir_out;
+	echo "$dir_out créé"
+fi
+
+echo "En attente des fichiers html et css";
+while [[ true ]]; do
+	if [[ -f $dir_in/$fic_start ]]; then
+		echo "Fichiers trouvé";
+		for fic in $dir_in/*.html
+		do
+			weasyprint -s $dir_in/style.css ${fic} ${dir_out}/page${num}.pdf
+			((num=num+1))
+		done
+		cp $dir_in/style.css $dir_out/style.css
+		echo "Traitement terminé"
+	fi
+	sleep 5;
+done

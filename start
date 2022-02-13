@@ -1,0 +1,45 @@
+#!/bin/bash
+#SAE103 BUT info 2022
+#GOETGHEBEUR Julien
+
+echo Création du volume
+docker volume create sae103
+
+echo Installation des scripts dans le volume
+docker container run -d --name sae103-tmp -v sae103:/data bigpapoo/php-cli74 tail -f /dev/null
+docker cp mdToHtml.py sae103-tmp:/data
+docker cp md2html sae103-tmp:/data
+docker cp htmlToPdf sae103-tmp:/data
+docker cp htmlToPng sae103-tmp:/data
+docker cp finish.sh sae103-tmp:/data
+
+echo Fin installation
+docker container stop sae103-tmp
+docker container rm sae103-tmp
+
+docker container run -d --name sae103-python -w /data -v sae103:/data python ./md2html
+docker container run -d --name sae103-html2png -w /data -v sae103:/data bigpapoo/html2png ./htmlToPng
+docker container run -d --name sae103-weasyprint -w /data -v sae103:/data bigpapoo/weasyprint ./htmlToPdf
+docker container run -d --name sae103-finish -w /data -v sae103:/data bigpapoo/php-cli74 ./finish.sh
+
+
+echo Pret
+
+
+# start
+#   - créer le volume
+#   - ajoute les script 
+#   - lance les conteneur
+# put 
+#   - met le fichier md dans le conteneur de read
+# read
+#   - lit le fichier md et créé les fichiers html
+#   - associe le css au html
+# html2png
+#   - transforme les html en png
+# easyprint
+#   - transforme les html en pdf
+# finish
+#   - ajoute tout dans une archive de fin et supprime les conteneur
+# get
+#   - recupère l'archive de finish dans le repertoire courant

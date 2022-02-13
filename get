@@ -1,0 +1,5 @@
+#!/bin/bash
+#SAE103 BUT info 2022
+#GOETGHEBEUR Julien
+
+docker container cp sae103-finish:/data/archive.tgz .

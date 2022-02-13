@@ -1,0 +1,34 @@
+#!/bin/bash
+#SAE103 BUT info 2022
+#GOETGHEBEUR Julien
+
+dir_in="md"
+dir_out="html"
+fic_start="style.css"
+
+echo "Création des dossiers $dir_in et $dir_out";
+if [[ ! -d $dir_in ]]; then
+	mkdir $dir_in;
+	echo "$dir_in créé"
+fi
+if [[ ! -d $dir_out ]]; then
+	mkdir $dir_out;
+	echo "$dir_out créé"
+fi
+
+echo "En attente des fichiers config.md et style.css"
+while true
+do
+	if [ -f $dir_in/$fic_start ]; then
+		echo "Fichiers trouvés"
+		python3 mdToHtml.py
+		mv $dir_in/$fic_start $dir_out/$fic_start
+		echo "contenu $dir_in"
+		ls $dir_in
+		echo "contenu $dir_out"
+		ls $dir_out
+		rm $dir_in/config.md
+		echo "Traitement terminé"
+	fi
+	sleep 5
+done

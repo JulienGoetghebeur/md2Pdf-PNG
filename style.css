@@ -1,0 +1,33 @@
+//SAE103 BUT info 2022
+//GOETGHEBEUR Julien
+
+body{
+	margin : 0;
+}
+
+header{
+	background-color: blue;
+	color: white;
+	height: 5em;
+	padding : 1.5em;
+	font-size: 60;
+}
+
+p,ul{
+	color:  black;
+	margin : 3em;
+	font-size: 18;
+}
+
+.code{
+	margin : 3em;
+	background-color: black;
+	border: solid ;
+	border-radius: 7;
+}
+
+.code>p{
+	margin: 1em;
+	color: white;
+}
+
